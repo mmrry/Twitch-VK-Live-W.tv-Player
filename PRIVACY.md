@@ -1,7 +1,7 @@
 # Политика конфиденциальности
 
 **Twitch → VK Video Live / W.tv Player** (userscript для Tampermonkey)
-Версия скрипта: 2.3.2 · Дата редакции: 22 октября 2026
+Версия скрипта: 2.4.0 · Дата редакции: 22 октября 2026
 
 [English version below](#privacy-policy-english)
 
@@ -44,7 +44,7 @@
 
 Cookies к API VK и W.tv передаются намеренно: скрипт не трогает вашу авторизацию и работает так же, как если бы вы открыли сайт сам. Скрипт не читает и не сохраняет эти cookies, их подставляет браузер или Tampermonkey.
 
-В фоновой или свёрнутой вкладке проверки не выполняются. Они возобновятся, когда вы вернётесь на вкладку.
+В фоновой или свёрнутой вкладке проверки не выполняются, а уже начатые отменяются. Они возобновятся, когда вы вернётесь на вкладку. Единственное исключение: если в фоновой вкладке играет W.tv и ссылка на поток устарела, скрипт один раз запрашивает новую, чтобы видео не остановилось.
 
 ## 4. Встроенный плеер VK (Embed)
 
@@ -111,7 +111,7 @@ Cookies к API VK и W.tv передаются намеренно: скрипт 
 ## Privacy Policy (English)
 
 **Twitch → VK Video Live / W.tv Player** (Tampermonkey userscript)
-Script version: 2.3.2 · Last updated: October 22, 2026
+Script version: 2.4.0 · Last updated: October 22, 2026
 
 ### Summary
 
@@ -144,7 +144,7 @@ Requests go **only** to the hosts below. Tampermonkey's `@connect` list contains
 | `okcdn.ru`, `mycdn.me`, `vkuser.net` (VK video servers) | Only in the hidden debug HLS mode | Playlist and video segment requests, your IP | **No** |
 | `cdn.jsdelivr.net` | Once at install and on script updates (performed by Tampermonkey) | Download of hls.js 1.6.19, your IP | — |
 
-Cookies are sent to the VK and W.tv APIs on purpose: the script leaves your sign-in alone and behaves as if you had opened the site yourself. The script never reads or stores these cookies; the browser or Tampermonkey attaches them. No checks run while the tab is hidden; they resume when you return to it.
+Cookies are sent to the VK and W.tv APIs on purpose: the script leaves your sign-in alone and behaves as if you had opened the site yourself. The script never reads or stores these cookies; the browser or Tampermonkey attaches them. No checks run while the tab is hidden, and checks already in progress are cancelled; they resume when you return to it. The only exception: if W.tv is playing in a background tab and its stream link expires, the script requests a new one once so playback doesn't stop.
 
 ### 4. VK embedded player
 
