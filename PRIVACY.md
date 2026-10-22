@@ -1,7 +1,7 @@
 # Политика конфиденциальности
 
 **Twitch → VK Video Live / W.tv Player** (userscript для Tampermonkey)
-Версия скрипта: 2.5.0 · Дата редакции: 22 октября 2026
+Версия скрипта: 2.6.0 · Дата редакции: 22 октября 2026
 
 [English version below](#privacy-policy-english)
 
@@ -18,7 +18,7 @@
 
 ## 1. Что скрипт делает
 
-На страницах каналов Twitch, для которых настроено соответствие (по умолчанию `twitch.tv/fasoollka`), скрипт проверяет, идёт ли стрим на VK Video Live или W.tv. Если идёт, он показывает плеер этого сервиса поверх плеера Twitch. Пока показан этот плеер, видео Twitch ставится на паузу и выключается звук. Когда вы его закрываете, скрипт возвращает плеер Twitch в прежнее состояние.
+На страницах каналов Twitch, для которых настроено соответствие (по умолчанию `twitch.tv/fasoollka`), скрипт проверяет, идёт ли стрим на VK Video Live или W.tv. Статус показывается на плашках справа в плеере Twitch. Плеер сервиса открывается поверх плеера Twitch **только после вашего клика** по плашке. Пока показан этот плеер, видео Twitch ставится на паузу и выключается звук. Когда вы его закрываете, скрипт возвращает плеер Twitch в прежнее состояние.
 
 На всех остальных страницах Twitch скрипт ничего не показывает и никуда не обращается.
 
@@ -48,7 +48,7 @@ Cookies к API VK и W.tv передаются намеренно: скрипт 
 
 ## 4. Встроенный плеер VK (Embed)
 
-Стримы VK показываются через **официальный embed-плеер VK** (`live.vkvideo.ru/app/embed/<канал>`) во встроенном фрейме. Это страница VK, и на неё распространяется **политика конфиденциальности VK**, а не этого скрипта:
+Стримы VK показываются через **официальный embed-плеер VK** (`live.vkvideo.ru/app/embed/<канал>`) во встроенном фрейме. Страница VK загружается **только после вашего клика** по плашке VK, а не при заходе на канал. Это страница VK, и на неё распространяется **политика конфиденциальности VK**, а не этого скрипта:
 
 - VK получает ваш IP-адрес, имя канала и источник перехода (`https://www.twitch.tv/`).
 - VK может использовать свои cookies, если браузер разрешает cookies во встроенных фреймах.
@@ -111,7 +111,7 @@ Cookies к API VK и W.tv передаются намеренно: скрипт 
 ## Privacy Policy (English)
 
 **Twitch → VK Video Live / W.tv Player** (Tampermonkey userscript)
-Script version: 2.5.0 · Last updated: October 22, 2026
+Script version: 2.6.0 · Last updated: October 22, 2026
 
 ### Summary
 
@@ -122,7 +122,7 @@ Script version: 2.5.0 · Last updated: October 22, 2026
 
 ### 1. What the script does
 
-On Twitch channel pages that have a mapping configured (by default `twitch.tv/fasoollka`), the script checks whether the streamer is live on VK Video Live or W.tv. If so, it shows that service's player on top of the Twitch player. While that player is shown, the Twitch video is paused and muted; when you close it, the script puts the Twitch player back the way it was. On every other Twitch page the script shows nothing and makes no requests.
+On Twitch channel pages that have a mapping configured (by default `twitch.tv/fasoollka`), the script checks whether the streamer is live on VK Video Live or W.tv. The status is shown on badges on the right of the Twitch player; the service's player opens on top of it **only after you click** a badge. While that player is shown, the Twitch video is paused and muted; when you close it, the script puts the Twitch player back the way it was. On every other Twitch page the script shows nothing and makes no requests.
 
 ### 2. Data used on the Twitch page
 
@@ -148,7 +148,7 @@ Cookies are sent to the VK and W.tv APIs on purpose: the script leaves your sign
 
 ### 4. VK embedded player
 
-VK streams are shown with VK's **official embed player** (`live.vkvideo.ru/app/embed/<channel>`) inside a frame. That page belongs to VK and is covered by **VK's privacy policy**, not this one:
+VK streams are shown with VK's **official embed player** (`live.vkvideo.ru/app/embed/<channel>`) inside a frame. The VK page loads **only after you click** the VK badge, not when you open the channel. That page belongs to VK and is covered by **VK's privacy policy**, not this one:
 
 - VK receives your IP address, the channel name and the referring origin (`https://www.twitch.tv/`).
 - VK may use its own cookies if your browser allows cookies in embedded frames.
