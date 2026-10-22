@@ -1,7 +1,7 @@
 # Политика конфиденциальности
 
 **Twitch → VK Video Live / W.tv Player** (userscript для Tampermonkey)
-Версия скрипта: 2.4.0 · Дата редакции: 22 октября 2026
+Версия скрипта: 2.5.0 · Дата редакции: 22 октября 2026
 
 [English version below](#privacy-policy-english)
 
@@ -111,7 +111,7 @@ Cookies к API VK и W.tv передаются намеренно: скрипт 
 ## Privacy Policy (English)
 
 **Twitch → VK Video Live / W.tv Player** (Tampermonkey userscript)
-Script version: 2.4.0 · Last updated: October 22, 2026
+Script version: 2.5.0 · Last updated: October 22, 2026
 
 ### Summary
 
