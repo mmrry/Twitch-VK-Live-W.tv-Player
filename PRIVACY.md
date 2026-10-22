@@ -1,7 +1,7 @@
 # Политика конфиденциальности
 
 **Twitch → VK Video Live / W.tv / Kick Player** (userscript для Tampermonkey)
-Версия скрипта: 2.9.0 · Дата редакции: 22 октября 2026
+Версия скрипта: 2.9.1 · Дата редакции: 22 октября 2026
 
 [English version below](#privacy-policy-english)
 
@@ -113,7 +113,7 @@ Cookies к API VK, W.tv и Kick передаются намеренно: скр�
 ## Privacy Policy (English)
 
 **Twitch → VK Video Live / W.tv / Kick Player** (Tampermonkey userscript)
-Script version: 2.9.0 · Last updated: October 22, 2026
+Script version: 2.9.1 · Last updated: October 22, 2026
 
 ### Summary
 
