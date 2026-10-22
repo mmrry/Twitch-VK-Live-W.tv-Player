@@ -1,7 +1,7 @@
 # Политика конфиденциальности
 
-**Twitch → VK Video Live / W.tv Player** (userscript для Tampermonkey)
-Версия скрипта: 2.6.0 · Дата редакции: 22 октября 2026
+**Twitch → VK Video Live / W.tv / Kick Player** (userscript для Tampermonkey)
+Версия скрипта: 2.7.0 · Дата редакции: 22 октября 2026
 
 [English version below](#privacy-policy-english)
 
@@ -11,7 +11,7 @@
 
 - У скрипта **нет собственного сервера**. Автор не получает никаких ваших данных: нет аналитики, телеметрии, счётчиков и отчётов об ошибках.
 - Скрипт **не читает** пароли, cookies (`document.cookie`), `localStorage`/`sessionStorage`, сообщения чата, данные вашего аккаунта Twitch и содержимое форм.
-- Скрипт обращается **только к VK Video Live, W.tv и их видеосерверам**, чтобы узнать, идёт ли стрим, и показать его. Эти сервисы видят ваш IP-адрес и, для запросов к своему API, свои cookies в вашем браузере.
+- Скрипт обращается **только к VK Video Live, W.tv, Kick и их видеосерверам**, чтобы узнать, идёт ли стрим, и показать его. Эти сервисы видят ваш IP-адрес и, для запросов к своему API, свои cookies в вашем браузере.
 - Настройки хранятся **только локально** в Tampermonkey и удаляются вместе со скриптом.
 
 ---
@@ -38,13 +38,14 @@
 |---|---|---|---|
 | `api.live.vkvideo.ru` | Раз в минуту, пока открыта настроенная страница и вкладка видима | Имя VK-канала, ваш IP, User-Agent, заголовок `Referer: https://live.vkvideo.ru/<канал>` | **Да**, cookies VK из вашего браузера (если вы вошли в VK, запрос может быть связан с вашим аккаунтом) |
 | `profiles-service.w.tv`, `streams-search-service.w.tv` | Раз в минуту, на тех же условиях | Ник W.tv-канала и его ID, язык интерфейса (`ru`/`en`), ваш IP, User-Agent, `Referer: https://w.tv/` | **Да**, cookies W.tv из вашего браузера |
-| `*.live-video.net` (Amazon IVS, видеосерверы W.tv) | Пока вы смотрите W.tv | Запросы плейлистов и видеофрагментов, ваш IP | **Нет** |
+| `kick.com` (только `/api/v2/channels/…`) | Раз в минуту, на тех же условиях | Имя Kick-канала, ваш IP, User-Agent, заголовки `Referer: https://kick.com/<канал>`, `X-App-Platform: web` | **Да**, cookies Kick из вашего браузера (включая cookies защиты Cloudflare) |
+| `*.live-video.net` (Amazon IVS, видеосерверы W.tv и Kick) | Пока вы смотрите W.tv или Kick | Запросы плейлистов и видеофрагментов, ваш IP | **Нет** |
 | `okcdn.ru`, `mycdn.me`, `vkuser.net` (видеосерверы VK) | Только в скрытом debug-режиме HLS | Запросы плейлистов и видеофрагментов, ваш IP | **Нет** |
 | `cdn.jsdelivr.net` | Один раз при установке и при обновлениях скрипта (это делает Tampermonkey) | Загрузка библиотеки hls.js 1.6.19, ваш IP | — |
 
-Cookies к API VK и W.tv передаются намеренно: скрипт не трогает вашу авторизацию и работает так же, как если бы вы открыли сайт сам. Скрипт не читает и не сохраняет эти cookies, их подставляет браузер или Tampermonkey.
+Cookies к API VK, W.tv и Kick передаются намеренно: скрипт не трогает вашу авторизацию и работает так же, как если бы вы открыли сайт сам. Скрипт не читает и не сохраняет эти cookies, их подставляет браузер или Tampermonkey.
 
-В фоновой или свёрнутой вкладке проверки не выполняются, а уже начатые отменяются. Они возобновятся, когда вы вернётесь на вкладку. Единственное исключение: если в фоновой вкладке играет W.tv и ссылка на поток устарела, скрипт один раз запрашивает новую, чтобы видео не остановилось.
+В фоновой или свёрнутой вкладке проверки не выполняются, а уже начатые отменяются. Они возобновятся, когда вы вернётесь на вкладку. Единственное исключение: если в фоновой вкладке играет W.tv или Kick и ссылка на поток устарела, скрипт один раз запрашивает новую, чтобы видео не остановилось.
 
 ## 4. Встроенный плеер VK (Embed)
 
@@ -64,8 +65,8 @@ Cookies к API VK и W.tv передаются намеренно: скрипт 
 
 | Ключ | Содержимое |
 |---|---|
-| `channelMap2` | Соответствия «канал Twitch → каналы VK / W.tv» |
-| `volume_wtv`, `volume_vk` | Последняя выбранная громкость |
+| `channelMap2` | Соответствия «канал Twitch → каналы VK / W.tv / Kick» |
+| `volume_wtv`, `volume_kick`, `volume_vk` | Последняя выбранная громкость |
 | `quality` | Выбранное качество видео |
 | `mode` | Режим плеера VK (используется только в debug) |
 | `debug` | Включён ли debug-режим постоянно (по умолчанию нет) |
@@ -80,9 +81,9 @@ Cookies к API VK и W.tv передаются намеренно: скрипт 
 
 ## 7. Как ограничить или удалить данные
 
-- **Отключить скрипт на канале.** В меню Tampermonkey выберите «⚙ Каналы Twitch → VK / W.tv» и удалите нужную строку. Если очистить поле целиком, скрипт перестанет работать везде.
+- **Отключить скрипт на канале.** В меню Tampermonkey выберите «⚙ Каналы Twitch → VK / W.tv / Kick» и удалите нужную строку. Если очистить поле целиком, скрипт перестанет работать везде.
 - **Не загружать страницу VK.** Оставьте в соответствии только W.tv, например `fasoollka=wtv:fasolka`.
-- **Ограничить cookies.** Выйдите из аккаунта VK или W.tv либо заблокируйте сторонние cookies в настройках браузера.
+- **Ограничить cookies.** Выйдите из аккаунта VK, W.tv или Kick либо заблокируйте сторонние cookies в настройках браузера.
 - **Удалить все данные.** Удалите скрипт в Tampermonkey: его хранилище удаляется вместе с ним. Можно также очистить ключи во вкладке «Хранилище» скрипта.
 
 ## 8. Сторонние сервисы
@@ -91,11 +92,12 @@ Cookies к API VK и W.tv передаются намеренно: скрипт 
 
 - VK Video Live (VK): <https://vk.com/privacy>
 - W.tv: политика на сайте <https://w.tv>
-- Amazon IVS (видеодоставка W.tv): <https://aws.amazon.com/privacy/>
+- Kick: <https://kick.com/privacy-policy>
+- Amazon IVS (видеодоставка W.tv и Kick): <https://aws.amazon.com/privacy/>
 - jsDelivr (загрузка hls.js): <https://www.jsdelivr.com/terms/privacy-policy>
 - Twitch: <https://legal.twitch.com/legal/privacy-notice>
 
-Скрипт не связан с Twitch, VK, W.tv или Amazon и не одобрен ими.
+Скрипт не связан с Twitch, VK, W.tv, Kick или Amazon и не одобрен ими.
 
 ## 9. Изменения
 
@@ -110,14 +112,14 @@ Cookies к API VK и W.tv передаются намеренно: скрипт 
 
 ## Privacy Policy (English)
 
-**Twitch → VK Video Live / W.tv Player** (Tampermonkey userscript)
-Script version: 2.6.0 · Last updated: October 22, 2026
+**Twitch → VK Video Live / W.tv / Kick Player** (Tampermonkey userscript)
+Script version: 2.7.0 · Last updated: October 22, 2026
 
 ### Summary
 
 - The script has **no server of its own**. The author receives **no data** from you: no analytics, telemetry, counters or crash reports.
 - The script **does not read** passwords, cookies (`document.cookie`), `localStorage`/`sessionStorage`, chat messages, your Twitch account data or form contents.
-- It only contacts **VK Video Live, W.tv and their video servers**, to check whether a stream is live and to play it. These services see your IP address and, for requests to their own API, their own cookies stored in your browser.
+- It only contacts **VK Video Live, W.tv, Kick and their video servers**, to check whether a stream is live and to play it. These services see your IP address and, for requests to their own API, their own cookies stored in your browser.
 - Settings are stored **locally only** in Tampermonkey and are deleted together with the script.
 
 ### 1. What the script does
@@ -140,11 +142,12 @@ Requests go **only** to the hosts below. Tampermonkey's `@connect` list contains
 |---|---|---|---|
 | `api.live.vkvideo.ru` | Once a minute while a mapped page is open and the tab is visible | VK channel name, your IP, User-Agent, `Referer: https://live.vkvideo.ru/<channel>` | **Yes**, your browser's VK cookies (if you are signed in to VK, the request may be linked to your account) |
 | `profiles-service.w.tv`, `streams-search-service.w.tv` | Same as above | W.tv channel nickname and ID, UI language (`ru`/`en`), your IP, User-Agent, `Referer: https://w.tv/` | **Yes**, your browser's W.tv cookies |
-| `*.live-video.net` (Amazon IVS, W.tv video delivery) | While you watch W.tv | Playlist and video segment requests, your IP | **No** |
+| `kick.com` (only `/api/v2/channels/…`) | Same as above | Kick channel name, your IP, User-Agent, `Referer: https://kick.com/<channel>`, `X-App-Platform: web` | **Yes**, your browser's Kick cookies (including Cloudflare protection cookies) |
+| `*.live-video.net` (Amazon IVS, W.tv and Kick video delivery) | While you watch W.tv or Kick | Playlist and video segment requests, your IP | **No** |
 | `okcdn.ru`, `mycdn.me`, `vkuser.net` (VK video servers) | Only in the hidden debug HLS mode | Playlist and video segment requests, your IP | **No** |
 | `cdn.jsdelivr.net` | Once at install and on script updates (performed by Tampermonkey) | Download of hls.js 1.6.19, your IP | — |
 
-Cookies are sent to the VK and W.tv APIs on purpose: the script leaves your sign-in alone and behaves as if you had opened the site yourself. The script never reads or stores these cookies; the browser or Tampermonkey attaches them. No checks run while the tab is hidden, and checks already in progress are cancelled; they resume when you return to it. The only exception: if W.tv is playing in a background tab and its stream link expires, the script requests a new one once so playback doesn't stop.
+Cookies are sent to the VK, W.tv and Kick APIs on purpose: the script leaves your sign-in alone and behaves as if you had opened the site yourself. The script never reads or stores these cookies; the browser or Tampermonkey attaches them. No checks run while the tab is hidden, and checks already in progress are cancelled; they resume when you return to it. The only exception: if W.tv or Kick is playing in a background tab and its stream link expires, the script requests a new one once so playback doesn't stop.
 
 ### 4. VK embedded player
 
@@ -162,8 +165,8 @@ Everything is stored **only on your device**, in this script's Tampermonkey stor
 
 | Key | Contents |
 |---|---|
-| `channelMap2` | Twitch channel → VK / W.tv channel mappings |
-| `volume_wtv`, `volume_vk` | Last chosen volume |
+| `channelMap2` | Twitch channel → VK / W.tv / Kick channel mappings |
+| `volume_wtv`, `volume_kick`, `volume_vk` | Last chosen volume |
 | `quality` | Chosen video quality |
 | `mode` | VK player mode (debug only) |
 | `debug` | Whether debug mode is permanently on (off by default) |
@@ -178,9 +181,9 @@ Off by default. When enabled (Alt+Shift+D or the `debug: true` key), the script 
 
 ### 7. Limiting or deleting data
 
-- **Turn the script off for a channel:** in the Tampermonkey menu choose "⚙ Twitch → VK / W.tv channels" and remove the line. Clearing the field entirely turns the script off everywhere.
+- **Turn the script off for a channel:** in the Tampermonkey menu choose "⚙ Twitch → VK / W.tv / Kick channels" and remove the line. Clearing the field entirely turns the script off everywhere.
 - **Don't load the VK page:** map W.tv only, e.g. `fasoollka=wtv:fasolka`.
-- **Limit cookies:** sign out of VK or W.tv, or block third-party cookies in your browser.
+- **Limit cookies:** sign out of VK, W.tv or Kick, or block third-party cookies in your browser.
 - **Delete all data:** uninstall the script in Tampermonkey; its storage is removed with it. You can also clear the keys in the script's Storage tab.
 
 ### 8. Third-party services
@@ -189,11 +192,12 @@ The script works with services the author does not own or control; their own pri
 
 - VK Video Live (VK): <https://vk.com/privacy>
 - W.tv: see <https://w.tv>
-- Amazon IVS (W.tv video delivery): <https://aws.amazon.com/privacy/>
+- Kick: <https://kick.com/privacy-policy>
+- Amazon IVS (W.tv and Kick video delivery): <https://aws.amazon.com/privacy/>
 - jsDelivr (hls.js download): <https://www.jsdelivr.com/terms/privacy-policy>
 - Twitch: <https://legal.twitch.com/legal/privacy-notice>
 
-This script is not affiliated with or endorsed by Twitch, VK, W.tv or Amazon.
+This script is not affiliated with or endorsed by Twitch, VK, W.tv, Kick or Amazon.
 
 ### 9. Changes
 
