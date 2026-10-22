@@ -1,7 +1,7 @@
 # Политика конфиденциальности
 
 **Twitch → VK Video Live / W.tv / Kick Player** (userscript для Tampermonkey)
-Версия скрипта: 2.8.1 · Дата редакции: 22 октября 2026
+Версия скрипта: 2.9.0 · Дата редакции: 22 октября 2026
 
 [English version below](#privacy-policy-english)
 
@@ -55,7 +55,7 @@ Cookies к API VK, W.tv и Kick передаются намеренно: скр�
 - VK может использовать свои cookies, если браузер разрешает cookies во встроенных фреймах.
 - Страница VK работает со своей аналитикой. При тестировании она обращалась к счётчикам статистики VK и Mail.ru и отправляла отметки просмотра, по которым вы учитываетесь как зритель стрима.
 
-Внутри этого фрейма скрипт делает только три вещи: скрывает надпись «Смотреть на VK Видео Live», убирает полосу прокрутки и запускает видео, если оно не стартовало само. Скрипт ничего не читает со страницы VK и никуда не отправляет.
+Внутри этого фрейма скрипт делает только четыре вещи: скрывает надпись «Смотреть на VK Видео Live», убирает полосу прокрутки, запускает видео, если оно не стартовало само, и сообщает странице Twitch (только `https://www.twitch.tv`) сигнал «курсор двигается», чтобы показать панель управления. В этом сигнале нет никаких данных: ни координат, ни содержимого страницы. Скрипт ничего не читает со страницы VK и ничего не отправляет ни на какие серверы.
 
 Если вы не хотите загружать страницу VK, удалите VK-канал из соответствий (см. раздел 7).
 
@@ -113,7 +113,7 @@ Cookies к API VK, W.tv и Kick передаются намеренно: скр�
 ## Privacy Policy (English)
 
 **Twitch → VK Video Live / W.tv / Kick Player** (Tampermonkey userscript)
-Script version: 2.8.1 · Last updated: October 22, 2026
+Script version: 2.9.0 · Last updated: October 22, 2026
 
 ### Summary
 
@@ -157,7 +157,7 @@ VK streams are shown with VK's **official embed player** (`live.vkvideo.ru/app/e
 - VK may use its own cookies if your browser allows cookies in embedded frames.
 - The page runs VK's own analytics. During testing it contacted VK and Mail.ru statistics counters and sent viewing heartbeats, which count you as a viewer of the stream.
 
-Inside that frame the script does only three things: hides the "Watch on VK Video Live" label, removes the scrollbar, and starts the video if it did not start on its own. It reads nothing from the VK page and sends nothing anywhere. If you don't want the VK page to load, remove the VK channel from your mappings (see section 7).
+Inside that frame the script does only four things: hides the "Watch on VK Video Live" label, removes the scrollbar, starts the video if it did not start on its own, and sends the Twitch page (`https://www.twitch.tv` only) a bare "cursor is moving" signal so the control bar can be shown. The signal carries no data — no coordinates, no page content. It reads nothing from the VK page and sends nothing to any server. If you don't want the VK page to load, remove the VK channel from your mappings (see section 7).
 
 ### 5. What is stored and where
 
